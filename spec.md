@@ -1,677 +1,318 @@
-PROJECT: The 0.18% — A scrollytelling essay on Antarctic ice-free 
-regions and machine learning soil geochemistry prediction.
-
-TECH STACK:
+# The 0.18% — Design Specification
+ 
+Current as of `index_v2.html`. 8 scenes total.
+ 
+---
+ 
+## Tech Stack
+ 
 - Vanilla HTML, CSS, JavaScript only. No frameworks.
-- Scrollama.js for scroll triggering 
-  (CDN: https://unpkg.com/scrollama)
-- D3 v7 for any data visualization 
-  (CDN: https://cdn.jsdelivr.net/npm/d3@7)
+- Scrollama.js for scroll triggering (CDN: https://unpkg.com/scrollama)
+- D3 v7 for data visualization (CDN: https://cdn.jsdelivr.net/npm/d3@7)
 - No jQuery, no React, no Vue.
-
-FONTS:
-- Primary: Suisse Int'l (self-hosted if available, 
-  fallback: Helvetica Neue, Helvetica, Arial, sans-serif)
-
-COLOR SYSTEM:
-/* Base */
---color-bg: #0A1628;
---color-text-primary: #E8F4F8;
+---
+ 
+## Color System
+ 
+```css
+--color-bg:             #0A1628;
+--color-text-primary:   #E8F4F8;
 --color-text-secondary: #4A9ECA;
---color-dig-deeper: #2D6E7E;
-
-/* Predictor layers (all same color) */
---color-predictor: #4A9ECA;
-
-/* Sample regions */
---color-region-tm: #A34A2A;   /* Transantarctic Mountains */
---color-region-svl: #C49A5A;  /* South Victoria Land */
---color-region-nvl: #7A8F5A;  /* North Victoria Land */
---color-region-nwap: #8A5E4A; /* NW Antarctic Peninsula */
-
-/* Target properties */
---color-nitrogen: #0E7A6E;
---color-potassium: #2E4FA8;
---color-sodium: #5A2E8A;
---color-phosphate: #8A1A4A;
-
-ASSET PATHS (all assets live in /assets/images/):
-- basemap.png
-- elevation.png
-- precipitation.png
-- lithology.png
-- contours.png (elevation contours, used as elevation 
-  alt visualization)
-- samples.png (sample locations map)
-- 28_regions.png (zoomed regional map)
-- ant_mass_change.png
-- ant_field_work.png
-- ant_dry_valley.jpeg
-- marsdry_valley.png
-
-GLOBAL UI ELEMENTS (present across all scenes):
-- Fixed "Dig Deeper" button, bottom right corner, 
-  color: #2D6E7E, appears from Scene 3 onward
-- Fixed right-side scroll progress dots, 
-  one per scene, highlight as reader advances
-- On mobile: stack layouts vertically
-
+--color-dig-deeper:     #2D6E7E;
+--c-bg-panel:           #0D1E35;
+--c-ice-shadow:         #5A88AA;
+--c-teal-light:         #3D8FA2;
+--c-border:             rgba(74,158,202,0.18);
+--c-overlay:            rgba(10,22,40,0.74);
+```
+ 
 ---
-
-SCENE 1 — TITLE / HOOK
-
-Layout: Full-bleed, centered, dark background #0A1628
-
-Elements (appear in this exact sequence):
-1. Background: Globe video/image of Antarctica centered, 
-   slowly rotating animation if possible, 
-   else static globe image
-2. Title fades in: "The 0.18%"
-   Font: large, white, centered
-3. Subtitle fades in below: 
-   "Predicting Antarctic Soil Geochemistry"
-   Font: small, #4A9ECA, centered
-4. On first scroll step:
-   Text appears: "Antarctica is 14.2 million square kilometers"
-5. On second scroll step:
-   Text appears: "Less than 0.18% of it is ice-free"
-6. Animation: Small warm-toned amber/rust colored flecks 
-   animate appearing along the ice free regions in Antarctica 
-   (along the bottom left/center coasts)
-7. On third scroll step:
-   Text appears: "These tiny pockets of land contain almost 
-   all of Antarctica's biodiversity, making them crucial for 
-   understanding life in extreme environments"
-8. Scroll cue: subtle animated down arrow appears
-
+ 
+## Global UI Elements
+ 
+- Fixed right-side progress dots, one per scene, highlight as reader advances. 9 dots total (Scene 8 is credits placeholder).
+- Fixed "Dig Deeper" button, bottom right, color `#2D6E7E`. Appears from Scene 2 onward. Slides up when Scene 3 (climate video) is active to avoid covering the panel. Opens a slide-in panel from the right.
+- Dig Deeper panel content is not yet scene-specific — panel opens with a generic heading.
 ---
-
-SCENE 2 — WHAT IS AN ICE-FREE REGION
-
-Layout: Two-column split screen
-
-LEFT COLUMN (black background, text/visuals):
-Sequential scroll steps reveal the following one at a time:
-
-Step 1: Title appears: "What exists in these regions?"
-
-Step 2: First circle appears (image inside circle, 
-        caption below):
-  - Image: Adelie penguin (penguin.jpg)
-  - Caption: "Macro-organisms"
-  - Arrow pointing right toward map
-
-Step 3: Second circle appears below first:
-  - Image: Glacial lake with microorganisms
-  - Caption: "Microorganisms" (microbe.jpg)
-  - Arrow pointing right toward map
-
-Step 4: Third circle appears below second:
-  - Image: Rock and soil, Transantarctic Mountains (soil.jpg)
-  - Caption: "Abiotic Factors"
-  - Arrow pointing right toward map
-
-Step 5: Top two circles + all arrows fade out. 
-        Only bottom circle (Abiotic Factors) remains.
-        Text block appears above it:
-  "The soils in these regions are among the most extreme 
-  on Earth: hyper-arid, UV-blasted, nutrient-poor, 
-  wind-scoured, and very, very cold. Understanding their 
-  geochemical makeup helps us understand how life persists 
-  even in the most unforgiving circumstances."
-
-Step 6: Bottom circle and text fade out. 
-        Left side goes fully dark.
-        New text block appears:
-  "But actually getting there is incredibly difficult and 
-  expensive. Our lab has analyzed only 171 soil samples 
-  from across these regions.
-
-  By pairing those samples with satellite-derived spatial 
-  data and machine learning, we can predict soil chemistry 
-  in areas that have never been sampled before."
-
-Transition: Antarctica outline map fades in, anchoring 
-the next several scenes.
-
-RIGHT COLUMN:
-- Zoomed photograph of western Antarctica coastline 
-  showing ice-free region patches
-- Stays fixed while left column text scrolls
-- Use a real photograph here (placeholder: 
-  /assets/images/icefree_photo.jpg)
-
+ 
+## Asset Paths
+ 
+All assets live under `assets/`. See `ASSETS.md` for the full inventory.
+ 
+```
+assets/video/
+  ant_sea_ice_globe.mp4
+  ant_ice_change.mp4
+ 
+assets/images/
+  ant_globe_view.png
+  antarctic_soils.jpg
+  ant_coast.jpg
+  ant_mass_change.png
+  soil_core.jpg
+  ant_fw_camp.jpg
+  ant_field_work.png
+  ant_dry_valley.png
+  acbr_regions.jpg
+  samples_real.svg
+  elevation.png
+  precipitation.png
+  contours.png
+  lithology.png
+  clean_01_delta-15N.png
+  clean_02_phosphorus.png
+  clean_03_sodium.png
+  clean_04_nickel.png
+  clean_10_titanium.png
+  ice_retreat_1.png through ice_retreat_6.png
+```
+ 
 ---
-
-SCENE 3 — THE PREDICTORS
-
-Layout: Map takes 65% of screen width, centered. 
-Tab controls on the right.
-
-Title (above map): "The Predictors"
-
-MAP COMPONENT:
-- Base layer always visible: basemap.png
-- One overlay layer visible at a time (default: elevation)
-- All overlays stacked absolutely, same dimensions, 
-  same position
-- Layer transition: opacity fade 300ms
-
-OVERLAY LAYERS (in tab order):
-1. id="layer-elevation"     src="elevation.png"
-2. id="layer-precipitation" src="precipitation.png"
-3. id="layer-lithology"     src="lithology.png"
-4. id="layer-contours"      src="contours.png"
-
-TAB COMPONENT (right side, vertical stack):
-- Tab style: pill shape, color #4A9ECA border, 
-  muted fill when inactive, solid fill when active
-- One tab per layer:
-  [ Elevation ]
-  [ Precipitation ]
-  [ Lithology ]
-  [ Distance to Coast ]
-
-Clicking a tab:
-  1. Active tab highlights
-  2. Current layer fades out (opacity 1 to 0, 300ms)
-  3. New layer fades in (opacity 0 to 1, 300ms)
-  4. Annotation text below map updates
-
-ANNOTATION TEXT (below map, updates per active tab):
-- Elevation: "Elevation shapes temperature, weathering rate, 
-  and soil development time across the continent, from the 
-  low coastal margins to the high interior plateau."
-- Precipitation: "Precipitation determines how much water 
-  moves through Antarctic soils, controlling the leaching 
-  of soluble ions and the distribution of pH across 
-  ice-free regions."
-- Lithology: "The underlying rock type sets the mineral 
-  foundation of every soil, with volcanic, metamorphic, 
-  and sedimentary substrates each producing distinct 
-  geochemical signatures."
-- Distance to Coast: "Distance to the coast captures the 
-  gradient of marine influence, from nitrogen-rich soils 
-  near penguin and seal colonies to the nutrient-depleted 
-  interior."
-
-DIG DEEPER PANEL CONTENT (Scene 3):
-Title: "About these maps"
-Body:
-  "All maps were created in ArcGIS using publicly 
-  available satellite data in the WGS 84 / Antarctic 
-  Polar Stereographic projection.
-
-  Sources:
-  - Base map: Earthstar Geographics
-  - Elevation: REMA (Reference Elevation Model 
-    of Antarctica)
-  - Precipitation: RACMO (Regional Atmospheric 
-    Climate Model)
-  - Distance to Coast: SCAR Antarctic Digital Database
-
-  Note on Lithology:
-  9 lithology codes classify rock type at each sample:
-  a – Intermediate volcanic
-  b – Mafic-ultramafic volcanic
-  c – Cover sediments (glacial till)
-  d – Mafic intrusive
-  g – Felsic intrusive
-  n – High-grade metamorphic
-  p – Low-medium grade metamorphic
-  s – Beacon Supergroup sedimentary
-  w – Mixed sedimentary and volcanic"
-
+ 
+## Scene 1 — The 0.18%
+ 
+**Layout:** Full-bleed, dark background `#0A1628`. Sticky graphic for the full scene height (260vh).
+ 
+**Background:** Globe video (`ant_sea_ice_globe.mp4`), autoplay muted loop, covers full viewport. Falls back to `ant_globe_view.png` if video fails.
+ 
+**On load:**
+- Title fades in centered: "The 0.18%"
+  - Font: large, weight 300, `--color-text-primary`
+- Subtitle below: "Predicting Antarctic Soil Geochemistry"
+  - Font: small, letter-spaced, `rgba(232,244,248,0.55)`
+- Scroll cue: animated down arrow + vertical line, fades on first scroll
+**Scroll sequence (triggered by scroll depth into scene):**
+- Title fades out after ~60px of scroll
+- Scroll cue hides after ~40px
+- At ~220px depth: `s1-text-1` fades in (top left)
+  - "Antarctica is buried under a dense blanket of ice, spanning 14.2 million square kilometers, making it the largest mass of ice on Earth"
+- At ~420px depth: `s1-text-2` fades in below, orange blob flecks activate
+  - "Less than **0.18% of this continent is ice-free**. And in that fraction lies almost all of Antarctica's biodiversity"
+**Blob flecks:**
+- SVG overlay of 10 orange circles (`#FF8C3A`) positioned over ice-free regions of Antarctica
+- Glow filter applied (`feGaussianBlur` stdDeviation 18)
+- Animate with `blobPulse` keyframes (opacity 0.45 to 0.90, staggered delays) when `.is-active` class is present
+- Scale transform: `scale(0.41)` centered on the Antarctica continent position
 ---
-
-SCENE 4 — THE 28 LOCATIONS, 171 SAMPLES
-
-Layout: Full-width Antarctica map with sample dots overlay
-
-MAP: samples.png displayed full width
-
-SCROLL SEQUENCE:
-Step 1: Map appears, no dots yet
-
-Step 2: Colored outlined box appears around 
-        Transantarctic Mountains cluster.
-        Colored tab appears on right: 
-        color #A34A2A, label "Transantarctic Mountains"
-        Info panel shows:
-          Name: "Transantarctic Mountains"
-          Sample count: "107 samples"
-          Description: "A 3,500 km mountain range dividing 
-          East and West Antarctica, containing some of the 
-          continent's largest and most geochemically diverse 
-          ice-free valleys."
-
-Step 3: Box + tab appear for South Victoria Land:
-        color #C49A5A
-          Name: "South Victoria Land"
-          Sample count: "71 samples"
-          Description: "A dense cluster of ice-free terrain 
-          near McMurdo Station, characterized by cold desert 
-          soils, glacial moraines, and strong marine nutrient 
-          input from nearby penguin colonies."
-
-Step 4: Box + tab appear for North Victoria Land:
-        color #7A8F5A
-          Name: "North Victoria Land"
-          Sample count: "8 samples"
-          Description: "A geologically complex coastal region 
-          dominated by volcanic and metamorphic rock, with 
-          sparse, nutrient-poor soils and limited 
-          biological activity."
-
-Step 5: Box + tab appear for NW Antarctic Peninsula:
-        color #8A5E4A
-          Name: "North-West Antarctic Peninsula"
-          Sample count: "15 samples"
-          Description: "The warmest and wettest part of 
-          Antarctica, with relatively high biological 
-          activity, greater organic matter accumulation, 
-          and soils strongly influenced by marine fauna."
-
-Step 6: Scroll past map. Dark background. 
-        Image appears: 28_regions.png (centered)
-        Caption below image:
-        "Within these 4 regions, 171 samples were collected 
-        across 28 sub-locations."
-
-Step 7: New text appears below image:
-        "This is a very limited dataset for understanding 
-        Antarctic ice-free soils. Can we predict 
-        geochemistry in regions we have never sampled?"
-
-DIG DEEPER PANEL CONTENT (Scene 4):
-  "Note on sample sizes: The sample sizes shown reflect 
-  our original total of 201 samples. After cleaning the 
-  dataset for missing values and errors, 171 samples 
-  remained for analysis. Shackleton Glacier alone 
-  contributes approximately 31% of the dataset, which 
-  may have over-influenced the models."
-
+ 
+## Scene 2 — Why Soils Matter
+ 
+**Layout:** Sticky graphic (620vh). Two overlapping phases sharing the same sticky container — soil phase (beats 0-2) and geo phase (beats 3-6) — cross-fading via opacity transitions.
+ 
+### Soil phase (beats 0-2)
+ 
+**Background:** `antarctic_soils.jpg`, opacity 0.35, with dark gradient overlay.
+ 
+**Left side — text stack** (`s2soil-text-stack`):
+One text block visible at a time, centered vertically, opacity transition.
+ 
+- Beat 0: "And in those exposed regions and buried deep beneath the ice, lies something most people never think about. **The soil**"
+- Beat 1: "These arid, gravelly soils are shaped by extreme cold and dry circumstances. These conditions have resulted in **unique geochemistry** that serves as the baseline for everything that can survive here."
+- Beat 2: "Despite low biological activity relative to other ecosystems, these soils support a diverse and unique set of organisms. **Without these unique conditions and soils as a baseline, none of this life could survive**"
+**Right side — ecosystem pyramid** (`s2soil-diagram`):
+SVG pyramid with 6 tiers, building bottom-up. Fades in at beat 1. All tiers visible at beat 2.
+ 
+Tiers (bottom to top):
+1. Soil Chemistry — `rgba(232,105,154)`
+2. Bacteria, Fungi & Cyanobacteria — `rgba(164,125,171)`
+3. Mites, Nematodes & Tardigrades — `rgba(60,120,200)`
+4. Mosses, Lichens & Flora — `rgba(74,158,202)`
+5. Krill, Icefish & Benthos — `rgba(74,202,158)`
+6. Seals, Whales & Penguins — `rgba(232,196,74)`
+### Geo phase (beats 3-6)
+ 
+**Background:** `ant_coast.jpg`, opacity 0.18 (drops to 0.06 at beat 6), with dark overlay.
+ 
+- Beat 3 (`s2geo-beat-a`): "Thousands of expeditions have been made over a century of Antarctic research"
+- Beat 4 (`s2geo-beat-a2`): "**And yet the geochemistry of these soils remains largely unmapped**"
+- Beat 5 (`s2geo-beat-a3`): "These soils are **barometers of environmental change**. If we can't understand them, we can't track what's changing, or what's being lost."
+- Beat 6 (`s2geo-beat-b`): Split layout — `soil_core.jpg` photo left, properties panel right.
+**Beat 6 properties panel:**
+- Title: "What Soil Chemistry Reveals"
+- Body: "Soil is a chemical record of an ecosystem, climate, and geology of the area. It's made up of dozens of unique chemical properties that give us specific insights into different aspects of Antarctic conditions"
+- Bubble tags: pH & Electrical Conductivity, Water-Soluble Ions, Nutrient Availability, Heavy & Trace Metals, Isotopic Signatures, Total Carbon & Nitrogen
+**Beat thresholds** (scroll progress through scene):
+- 0-12%: beat 0
+- 12-28%: beat 1
+- 28-42%: beat 2
+- 42-55%: beat 3
+- 55-65%: beat 4
+- 65-78%: beat 5
+- 78-100%: beat 6
 ---
-
-SCENE 5 — WHAT WE WANT TO PREDICT
-
-Layout: Dark background, centered cards
-
-Title: "What we want to predict"
-
-SCROLL SEQUENCE:
-Cards appear one at a time, sliding up from below 
-(transform: translateY 40px to 0, opacity 0 to 1, 
-500ms ease).
-
-Each card: horizontal layout, colored left border (6px), 
-dark background #111827, rounded corners, padding 24px.
-
-CARD FORMAT:
-- Large element abbreviation (left, bold)
-- Element name (below abbreviation)
-- One-sentence description (right of abbreviation)
-- Card accent color matches element color
-
-CARD 1 — Nitrogen
-  Abbreviation: N
-  Name: Nitrogen
-  Color: #0E7A6E
-  Description: "The primary nutrient limiting biological 
-  growth in polar soils, concentrated near coastal areas 
-  where marine animals deposit organic matter."
-
-CARD 2 — Potassium
-  Abbreviation: K
-  Name: Potassium
-  Color: #2E4FA8
-  Description: "Released slowly through rock weathering, 
-  potassium levels in Antarctic soils reflect the age and 
-  mineral composition of the underlying geology."
-
-CARD 3 — Sodium
-  Abbreviation: Na
-  Name: Sodium
-  Color: #5A2E8A
-  Description: "Salt accumulates in Antarctic soils through 
-  wind-blown sea spray and ancient marine deposits, with 
-  high concentrations acting as a hard limit on 
-  microbial survival."
-
-CARD 4 — Phosphate
-  Abbreviation: P
-  Name: Phosphate
-  Color: #8A1A4A
-  Description: "A critical nutrient for biological activity, 
-  phosphate in Antarctic soils comes almost entirely from 
-  parent rock weathering and marine fauna inputs 
-  near the coast."
-
-After all 4 cards visible, text appears below:
-"These are the four target elements we predict in 
-unsampled regions using satellite-derived 
-spatial variables."
-
-DIG DEEPER PANEL CONTENT (Scene 5):
-  "Note on targets: After processing all 171 samples, 
-  we measured 58 total unique geochemical characteristics. 
-  This visualization focuses on the top 4 by model 
-  performance.
-
-  More precise measurement names:
-  - Nitrogen: Delta-15N (Nitrogen Isotope Ratio)
-  - Potassium: K digest (Total Acid-Extractable Potassium)
-  - Sodium: Na digest (Total Acid-Extractable Sodium)
-  - Phosphate: PO4 total (Phosphate in Total Leachate)"
-
+ 
+## Scene 3 — Conditions Are Changing
+ 
+**Layout:** Sticky graphic (280vh). Full-bleed video.
+ 
+**Background:** `ant_ice_change.mp4`, muted loop, scale(1.12) to avoid letterboxing. Falls back to `ant_mass_change.png` on error. Dark overlay `rgba(10,22,40,0.55)`.
+ 
+**Play button:** Centered, appears if video hasn't autoplayed. Hides once playing.
+ 
+**Scroll sequence (by progress through scene):**
+- 0-33%: Title fades in centered — "And Antarctica is changing."
+  - Video begins playing on entry
+- 33-66%: Title hides. Play button shows if video isn't playing.
+- 66-100%: Frosted-glass panel fades in, bottom right.
+  - "As the climate warms, the ice is retreating and exposing soils that have been frozen for thousands of years. These soils hold valuable records of carbon, microbial life, and ecosystem history. Without geochemical baselines, we have no way to track what is changing."
+**Dig Deeper button:** Raised to `bottom: 80px` during this scene to avoid overlapping the panel.
+ 
 ---
-
-SCENE 6 — THE THREE MODELS
-
-Layout: Dark background, three circular cards in 
-a horizontal row
-
-Title: "The Machine Learning Algorithms"
-
-SCROLL SEQUENCE:
-Cards appear left to right, one per scroll step.
-Each card: circle shape, white fill #E8F4F8, 
-dark text, centered content.
-
-CARD FORMAT:
-- Model abbreviation (large, bold, top)
-- Full model name (smaller, below)
-- SVG schematic illustration (center of circle)
-- One-sentence description (below circle)
-
-CARD 1 — KNN (leftmost)
-  Abbreviation: KNN
-  Full name: K-Nearest Neighbors
-  Description: "Predicts a new location's soil chemistry 
-  by finding the most similar sampled locations and 
-  averaging their values."
-  Schematic: 5 dots, with lines connecting 4 outer dots 
-  to 1 central dot. Draw as inline SVG.
-
-CARD 2 — RF (center)
-  Abbreviation: RF
-  Full name: Random Forest
-  Description: "Builds hundreds of decision trees on 
-  random subsets of the data and averages their 
-  predictions to produce a more stable result."
-  Schematic: Branching tree. 1 line splits into 2, 
-  each splits into 2 more. Draw as inline SVG.
-
-CARD 3 — XGB (rightmost)
-  Abbreviation: XGB
-  Full name: XGBoost
-  Description: "Builds trees sequentially, where each 
-  new tree corrects the errors of the previous one, 
-  improving prediction accuracy with each step."
-  Schematic: 3 stacked horizontal bars, each slightly 
-  shorter than the one above. Draw as inline SVG.
-
-Caption below all three cards:
-"Each model performs differently depending on the target. 
-Comparing all three gives important insight into the 
-complex relationship between predictors and soil chemistry."
-
-DIG DEEPER PANEL CONTENT (Scene 6):
-  "How we evaluated the models:
-
-  Cross-validation splits the dataset into training and 
-  testing sets repeatedly so the model is always tested 
-  on samples it has never seen.
-
-  Leave-one-out validation is stricter: with only 171 
-  samples, we trained on 170 and tested on 1, repeating 
-  for every sample.
-
-  RMSE measures average prediction error in the original 
-  units of the data. Lower is better.
-
-  R² measures how much variation in soil chemistry the 
-  model explains. Our best targets reached around 0.40.
-
-  Model selection matters because KNN, Random Forest, 
-  and XGBoost each perform differently per target. 
-  Predictions shown use the best-performing model 
-  for each property.
-
-  For full methodology: 
-  https://github.com/lilyeliason/ansoil-spatial-prediction
-
-  Learn more about each model:
-  KNN: https://www.pinecone.io/learn/k-nearest-neighbor/
-  RF: https://williamkoehrsen.medium.com/random-forest-simple-explanation-377895a60d2d
-  XGB: https://medium.com/low-code-for-advanced-data-science/xgboost-explained-a-beginners-guide-095464ad418f"
-
+ 
+## Scene 4 — The Sampling Problem
+ 
+**Layout:** White background (`#ffffff`). Sticky graphic (380vh). 3 beats.
+ 
+**Beat thresholds:**
+- 0-33%: beat 0
+- 33-66%: beat 1
+- 66-100%: beat 2
+### Beat 0 — One approach
+ 
+Centered column layout. Dark text on white.
+ 
+- Body: "One approach to understanding these soils is to take a diverse and wide array of samples from across all 28 ice-free regions and analyzing their geochemical properties in a lab"
+- Map: `acbr_regions.jpg` centered below text
+- Caption: "Antarctic Conservation Biogeographic Regions (ACBRs)"
+### Beat 1 — But sampling everywhere isn't realistic
+ 
+Full-bleed `ant_fw_camp.jpg` left. Dark frosted panel right.
+ 
+Panel heading: "**But sampling everywhere isn't realistic**"
+ 
+Barrier list:
+- $ Expensive — "Each expedition costs tens of thousands of dollars per sample site."
+- ⏱ Time-consuming — "Each site requires days of preparation."
+- ⚑ Logistically difficult — "Extreme cold, remoteness, and limited field stations."
+### Beat 2 — The reality
+ 
+Split layout, dark background. Text left, map right.
+ 
+- Label: "The reality"
+- Headline: "For the entire continent, our lab has analyzed the geochemistry of only **171 samples** in **4 regions**"
+- Sub: "Ideal coverage would require thousands of samples from all 28 ACBR regions. What we have is a mere fraction of that."
+- Map: `samples_real.svg` in a white-background frame
+- Caption: "171 samples · 4 regions · 28 locations"
+- Legend: NW Antarctic Peninsula `#da3832`, Transantarctic Mountains `#a47dab`, South Victoria Land `#6a9295`, North Victoria Land `#6db85c`
 ---
-
-SCENE 7 — THE PREDICTION MAPS
-
-Layout: Close-up half view of Antarctica (left side 
-of continent focused to show sample-dense regions).
-Map takes full width.
-
-ELEMENT SELECTOR:
-4 colored rectangular buttons in 2x2 grid, 
-top corners of the map:
-  Top left:  [ Nitrogen ]  [ Potassium ]
-  Top right: [ Sodium ]    [ Phosphate ]
-Each button colored with its established element color.
-Default active: Nitrogen.
-
-MAP DISPLAY:
-- Sample locations shown as small black squares
-- Random grid prediction points shown as small circles
-- When an element is selected, prediction grid points 
-  for that element color according to its element color
-- Points with no successful prediction remain gray
-
-INFO PANEL (right side of map, updates per element):
-
-NITROGEN (color: #0E7A6E)
-  Standing: "Best-predicted target in the project."
-  Results:
-    Winner: XGB — R² = 0.416
-    RF — R² = 0.383
-    KNN — R² = 0.322
-  Driven by: Distance to Coast, Lithology, Elevation
-  Why: "Nitrogen isotopic signatures reflect marine aerosol 
-  input near the coast, biological cycling rates, and 
-  variation with rock substrate and elevation."
-
-POTASSIUM (color: #2E4FA8)
-  Standing: "Second best-predicted target, one of the 
-  most stable across model runs."
-  Results:
-    Winner: XGB — R² = 0.396
-    RF — R² = 0.359
-    KNN — R² = 0.065
-  Driven by: Lithology, Precipitation, Temperature
-  Why: "Potassium is strongly tied to parent rock 
-  mineralogy, particularly in sedimentary rock substrates."
-
-SODIUM (color: #5A2E8A)
-  Standing: "Third best-predicted target."
-  Results:
-    Winner: XGB — R² = 0.391
-    RF — R² = 0.380
-    KNN — R² = 0.318
-  Driven by: Elevation, Lithology, Distance to Coast
-  Why: "Sodium comes from two main sources: direct mineral 
-  weathering from lithology, and marine aerosol deposition, 
-  where lower-elevation coastal soils receive more 
-  sea-spray sodium."
-
-PHOSPHATE (color: #8A1A4A)
-  Standing: "Fourth best-predicted target."
-  Results:
-    Winner: RF — R² = 0.367
-    XGB — R² = 0.363
-    KNN — R² = 0.168
-  Driven by: Temperature, Elevation, Precipitation
-  Why: "Phosphate availability appears strongly 
-  temperature-controlled, possibly through weathering 
-  rates or biological phosphorus cycling."
-
+ 
+## Scene 5 — The Approach
+ 
+**Layout:** Dark background `--color-bg`. Sticky graphic (380vh). 3 beats.
+ 
+**Beat thresholds:**
+- 0-33%: beat 0 (satellite data)
+- 33-55%: beat 1 (pivot line)
+- 55-100%: beat 2 (equation)
+### Beat 0 — Satellite data
+ 
+Split layout. Text left, 2x2 image grid right.
+ 
+- Label: "Open Source Satellite Data"
+- Headline: "Satellites can observe the physical properties of every square meter of Antarctica's surface, whether anyone has been there or not."
+- Sub: "We have sourced 9 environmental satellite-derived spatial layers of map data"
+- Variable list: Lithology, Distance to Coast, Elevation, Mean Annual Temperature, Mean Annual Precipitation, Slope & Aspect, Latitude, Longitude
+Image grid (reveals with staggered delay on beat entry):
+- `elevation.png` — Elevation
+- `precipitation.png` — Precipitation
+- `contours.png` — Slope & Aspect
+- `lithology.png` — Lithology
+### Beat 1 — Pivot
+ 
+Centered text, bordered top and bottom:
+"**However, there is another way to look at Antarctica, one that doesn't require a single expedition**"
+ 
+### Beat 2 — Equation
+ 
+Centered column. Circular icon terms connected by + signs and an arrow.
+ 
+- Label: "The approach"
+- Headline: "By combining satellite data with our samples, we can make **predictions**"
+- Sub: "Machine learning algorithms learn the relationships between our satellite data and our soil samples to make predictions about the geochemistry in places we've never been before."
+Equation terms (left to right):
+1. 171 Soil Samples — "Known Spatial Data, Known Geochemistry" — purple icon
+2. + Satellite Data — "Known Spatial Data, Unknown Geochemistry" — blue icon
+3. + Machine Learning — "3 ML Models trained on both data types" — amber icon
+4. → Predicted Geochemistry — "Continent-wide predicted soil chemistry" — pink/coral output circle
 ---
-
-SCENE 8 — LIMITATIONS
-
-Layout: Full-width Antarctica base map, 
-dark background
-
-Text above map (scroll step 1):
-"This research is ongoing. Results and predictions 
-are subject to change."
-
-Text replaces it (scroll step 2):
-"With that said, there are meaningful limitations 
-to acknowledge."
-
-BUBBLES: Appear one by one floating around the map, 
-each on a scroll step. Style: rounded pill, 
-white border, white text, semi-transparent dark fill.
-
-If animated cloud overlay is feasible:
-  Add a semi-transparent hazy animated layer slowly 
-  rotating over the map to suggest uncertainty. 
-  If not feasible, use a static blurred overlay.
-
-Bubble 1: "Very limited and regionally unbalanced dataset"
-Bubble 2: "Biological predictor variables were not included"
-Bubble 3: "MAPE values are high even for strong predictions"
-Bubble 4: "Seed variation between model runs"
-
-DIG DEEPER PANEL CONTENT (Scene 8):
-  "Bubble 1: With only 171 samples, machine learning is 
-  difficult. Shackleton Glacier alone contributes 31% of 
-  the dataset and may have over-influenced results.
-
-  Bubble 2: Biological variables such as penguin colony 
-  locations, vegetation maps, and microorganism data 
-  could improve predictions meaningfully.
-
-  Bubble 3: High MAPE (Mean Absolute Percentage Error) 
-  means individual point predictions are unreliable. 
-  The model's primary value is in identifying 
-  spatial patterns, not precise point estimates.
-
-  Bubble 4: RF and XGBoost were run with multiple random 
-  seeds. Different seed combinations produced some 
-  variation in reported values."
-
+ 
+## Scene 6 — Explore the Predictions
+ 
+**Layout:** Dark background. Sticky graphic (20vh scroll). Interactive — not scroll-driven.
+ 
+**Map area:** Full-bleed prediction map images, stacked absolutely. One active at a time, opacity transition 0.8s.
+ 
+**Left panel** (`s7-info-panel`):
+- Title: "Explore the Predictions"
+- Sub: "Select a property to overlay ML-predicted geochemistry across the continent. Each map reveals a distinct environmental signal."
+- Active info box: shows property name, "Why does it look like this?" label, and explanation text. Updates on tab selection.
+**Right tab strip** (`s7-tabs-panel`):
+Vertical strip, full viewport height minus 80px. One tab per property. Active tab shows colored left bar and highlighted label.
+ 
+Current tabs and maps:
+ 
+| # | Label | Map file | Color |
+|---|-------|----------|-------|
+| 01 | Nitrogen Isotopes | `clean_01_delta-15N.png` | `#e87878` |
+| 02 | Phosphorus | `clean_02_phosphorus.png` | `#78c8a0` |
+| 03 | Sodium | `clean_03_sodium.png` | `#4A9ECA` |
+| 04 | Nickel | `clean_04_nickel.png` | `#c4a47d` |
+| 05 | Titanium | `clean_10_titanium.png` | `#9ab0c8` |
+ 
+**Planned additions** (clean_05 through clean_09 not yet wired up):
+Magnesium, Molybdenum, Nitrogen, Potassium, Phosphate.
+ 
+**Info pane content:**
+ 
+- Default (no selection): "Select a property →" / "Each layer reveals a different environmental driver shaped by millions of years of Antarctic isolation."
+- δ¹⁵N: "Coastal hotspots trace penguin rookeries and seal colonies whose waste enriches marine-derived nitrogen. Inland deserts, devoid of animals, show none of this signature."
+- Phosphorus: "Phosphorus concentrations track both bedrock weathering and biological inputs. Coastal zones with high animal activity show elevated values from guano and organic matter decomposition."
+- Sodium: "A fading ring around the continent's edges maps the marine aerosol footprint. Coastal winds deposit sea salt directly onto soil; the Transantarctic Mountains block this inland."
+- Nickel: "Nickel distribution closely follows mafic and ultramafic rock formations. Its sharp boundaries are a near-perfect trace of igneous intrusions across ice-free zones."
+- Titanium: "Stark jagged boundaries trace the Ferrar Dolerite volcanic formations almost perfectly. Chemical weathering is so slow here that bedrock lithology dominates the signal entirely."
 ---
-
-SCENE 9 — WHY ANY OF THIS MATTERS
-
-Layout: Transitions from dark to white background 
-as user scrolls through panels.
-
-Title: "Why Any of This Matters"
-
-Three panels, one per scroll beat. 
-Each panel: image on one side, text on other.
-
-PANEL 1 — Climate
-  Image: ant_mass_change.png
-  Text: "As the planet warms, Antarctic ice shelves are 
-  melting and ice-free areas are expanding. These soils 
-  act as delicate carbon sinks or sources. Understanding 
-  their geochemical makeup helps predict permafrost 
-  degradation, assess toxic trace element remobilization 
-  risk, and understand how ecosystems adapt as 
-  habitats expand."
-
-PANEL 2 — Field Science
-  Image: ant_field_work.png
-  Text: "Predictive models do not replace field science, 
-  they help inform it. Continent-wide prediction maps 
-  can guide targeted field expeditions focused on 
-  specific characteristics, saving significant time, 
-  money, and resources."
-
-PANEL 3 — Astrobiology
-  Images side by side:
-    Left: ant_dry_valley.jpeg 
-          Caption: "Wright Valley, Antarctica"
-    Right: marsdry_valley.png 
-           Caption: "Ubajara, Mars"
-  Text: "Antarctic ice-free soils are the closest analog 
-  on Earth to the Martian surface and serve as crucial 
-  terrestrial analogs for astrogeology, providing 
-  accessible extreme-environment settings for testing 
-  geological and biological processes."
-
-DIG DEEPER PANEL CONTENT (Scene 9):
-  Image Credits:
-  - NASA ICESat and ICESat-2. (2020). A Satellite Lets 
-    Scientists See Antarctica's Melting Like Never Before. 
-    New York Times.
-  - Unsworth, M. (2026). Cold outpost. 
-    Encyclopaedia Britannica.
-  - Arcus, C. (2002). View of the Wright Valley. 
-    Antarctica New Zealand Pictorial Collection.
-  - NASA/JPL-Caltech/MSSS. (2023). Curiosity Mars rover. 
-    Universe Today.
-
+ 
+## Scene 7 — Why It Matters
+ 
+**Layout:** Dark background with `ant_coast.jpg` at 6% opacity. Three equal-width cards side by side, full viewport height. Dividers between cards. Sticky graphic (20vh scroll).
+ 
+### Card 1 — Climate Science
+ 
+- Label: "Climate Science"
+- Title: "Tracking a changing continent"
+- Body: "As ice retreats and new soils emerge, we have no baseline for what they contain. Geochemical predictions give us that baseline — so we can measure what is being lost or created as the planet warms."
+- Visual: Slideshow cycling through `ice_retreat_1.png` through `ice_retreat_6.png`, 2200ms interval, crossfade 1.2s
+### Card 2 — Field Science
+ 
+- Label: "Field Science"
+- Title: "Smarter expeditions"
+- Body: "Continent-wide prediction maps tell future researchers exactly where the most scientifically valuable sites are — saving time, money, and the enormous logistical costs of Antarctic fieldwork."
+- Visual: `ant_field_work.png`, static
+### Card 3 — Astrobiology
+ 
+- Label: "Astrobiology"
+- Title: "A window to other worlds"
+- Body: "Antarctic ice-free soils are our closest analogue on Earth to the surface of Mars. Understanding what survives here — and why — is a guide to where we might search for life beyond our planet."
+- Visual: `ant_dry_valley.png`, static
 ---
-
-SCENE 10 — CLOSING
-
-Layout: Return to opening globe, full-bleed dark background
-
-VISUAL: Same globe as Scene 1, slowly rotating.
-Ice-free flecks now appear in multiple colors from 
-the full color palette (nitrogen teal, potassium indigo, 
-sodium violet, phosphate crimson, mixed).
-
-CLOSING TEXT (centered, fades in line by line):
-Line 1: "Antarctica is one of the most unique and complex 
-         places on Earth."
-Line 2: "These predictions are imperfect."
-Line 3: "The uncertainty is real."
-Line 4: "And the questions they raise — about what 
-         survives here, what is changing, and what this 
-         place has to teach us — are just beginning 
-         to be asked."
-
-CREDITS (appear below closing text):
-"Research and Visualization by Lily Eliason"
-"In collaboration with the LeMonte Lab of Geochemistry, 
-Brigham Young University"
-
-THREE BUTTONS (bottom of screen, colored rectangles):
-  [ Explore the Data ]  → link to data CSV
-  [ Learn More ]        → https://github.com/lilyeliason/ansoil-spatial-prediction
-  [ Content References ] → link to references page
-
+ 
+## Scene 8 — Credits
+ 
+Not yet built. Placeholder div present in HTML.
+ 
+Content to include:
+- Research data: BYU LeMonte Lab
+- Visualization: Lily Eliason
+- Course: DSPX315
+- Image and data credits
 ---
-
-IMPLEMENTATION NOTES FOR CLAUDE CODE:
-
-1. Build one scene at a time. Confirm each scene works 
-   in the browser before moving to the next.
-
-2. The Dig Deeper button is a fixed overlay present 
-   from Scene 3 onward. It opens a slide-in panel 
-   from the right. Panel content updates based on 
-   which scene is currently active. Track active scene 
-   with a global variable updated by Scrollama.
-
-3. Scene 3 map component and Scene 7 map component 
-   should share the same CSS class and base layout 
-   so they look visually consistent.
-
-4. All image overlays in Scene 3 must be exported 
-   at identical pixel dimensions and positioned 
-   identically so they register correctly when stacked.
-
-5. Add a keyboard shortcut during development: 
-   right arrow key advances to next scroll step. 
-   Remove before final submission.
-
-6. Test on both a wide desktop screen and a 
-   narrow mobile screen after each scene is built.
+ 
+## Implementation Notes
+ 
+1. All scene transitions are scroll-driven via a single `window.scroll` listener, not Scrollama step triggers (Scrollama is initialized but only used for `.step` class elements, currently unused). Scene progress is calculated as `scrolled / (scene.offsetHeight - window.innerHeight)`.
+2. Scene 2 is the most complex — 7 beats, two background cross-fades, a pyramid SVG, and a split layout all within one sticky container. Beat thresholds are percentage-based, defined in the scroll handler.
+3. Scene 6 is fully interactive and not scroll-driven. Tab clicks swap map layers and info panes directly via JS event listeners.
+4. The Dig Deeper button is positioned `fixed`, bottom right. It raises to `bottom: 80px` during Scene 3 to avoid overlapping the frosted panel. This is handled in `updateDigVisibility()`.
+5. Progress dots are generated dynamically for 9 scenes. Active dot updates in `updateDotFromScroll()` based on which scene's `offsetTop` the midpoint of the viewport has passed.
+6. Videos use `play().catch()` to handle autoplay blocking gracefully. Scene 1 globe video hides itself on error. Scene 3 video shows a play button if autoplay fails.
+7. White-background scenes (Scene 4) require text color overrides — the global `--color-text-primary` is light-colored and invisible on white. Scene 4 uses hardcoded dark text values (`#1a1a1a`, `rgba(0,0,0,0.55)`) throughout.
