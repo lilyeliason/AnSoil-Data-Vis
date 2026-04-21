@@ -881,9 +881,6 @@
   <section class="scene" id="scene-1">
     <div class="scene-graphic" id="scene-1-graphic">
       <div class="globe-fallback" aria-hidden="true"></div>
-      <video id="globe-video" autoplay muted loop playsinline preload="auto">
-        <source src="assets/video/ant_sea_ice_globe.mp4" type="video/mp4">
-      </video>
       <div class="scene-overlay" aria-hidden="true"></div>
       <div id="svg-flecks-container">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 428.21 348"
@@ -1493,12 +1490,6 @@
  
   <script>
   (() => {
-    const video = document.getElementById('globe-video');
-    if (video) {
-      video.play().catch(() => { video.style.display = 'none'; });
-      video.addEventListener('error', () => { video.style.display = 'none'; }, true);
-    }
- 
     const vid2  = document.getElementById("scene-2-video");
     const imgbg = document.getElementById("scene-2-imgbg");
     if (vid2) {
@@ -1736,7 +1727,7 @@
  
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
-      const globePlaying = video && !video.paused && !video.error && video.style.display !== 'none';
+      const globePlaying = false;
  
       if (scene1el) {
         const depth = scrollY - scene1el.offsetTop;
@@ -1744,14 +1735,9 @@
         else titleBlock?.classList.remove('faded');
         if (depth > 220) s1text1?.classList.add('visible');
         else s1text1?.classList.remove('visible');
-        if (depth > 550) {
-        s1text2?.classList.add('visible');
-        if (!globePlaying) startFlecks();
-        else stopFlecks();
-        } else {
-        s1text2?.classList.remove('visible');
-        stopFlecks();
-        }
+        if (depth > 550) { s1text2?.classList.add('visible'); startFlecks(); }
+        else { s1text2?.classList.remove('visible'); stopFlecks(); }
+      }
  
       if (scene2el) {
         const rect = scene2el.getBoundingClientRect();
