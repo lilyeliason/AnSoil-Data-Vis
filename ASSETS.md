@@ -1,30 +1,78 @@
 # Asset inventory
-
-## Images present and ready
-- basemap.png — plain satellite Antarctica map
-- elevation.png — red/orange/green elevation ramp
-- precipitation.png — blue precipitation raster (smoothed)
-- lithology.png — multicolored geological point data
-- contours.png — elevation contour lines 
-  (used as elevation alt visualization)
-- samples.png — sample location dots by ACBR region
-- 28_regions.png — zoomed regional sample map
-- ant_mass_change.png — ice mass change chart
-- ant_field_work.png — McMurdo Station fieldwork photo
-- ant_dry_valley.jpeg — Wright Valley Antarctica
-- marsdry_valley.png — Mars dry valley
-- globe_antarctica.png — Google Earth globe screenshot
-- penguin.jpg – Adelie Penguin for scene 2
-- microbe.jpg – Antarctic Microbes under Microscope for scene 2
-- soil.jpg – Scoop of soil for scene 2
-
-## Images still needed (use placeholder divs for now)
-- icefree_photo.jpg — zoomed photo of ice-free coastline 
-  for Scene 2 right panel
-
+ 
+Reflects assets currently referenced in `index_v2.html`. Unused files have been moved to `assets/images/asset_archive/`.
+ 
+---
+ 
 ## Video
-- ant_sea_ice_globe.mp4 — Google Earth rotating globe recording
-
-## Data
-- samples.csv — sample locations with lat/lon and 
-  ACBR region labels
+ 
+| File | Used in | Notes |
+|------|---------|-------|
+| `assets/video/ant_sea_ice_globe.mp4` | Scene 1 | Rotating globe, autoplay muted loop. Falls back to `ant_globe_view.png`. |
+| `assets/video/ant_ice_change.mp4` | Scene 3 | Ice retreat footage, muted loop. Falls back to `ant_mass_change.png` on error. |
+ 
+---
+ 
+## Images
+ 
+### Backgrounds and photos
+ 
+| File | Used in | Notes |
+|------|---------|-------|
+| `ant_globe_view.png` | Scene 1 | Fallback background if globe video fails |
+| `antarctic_soils.jpg` | Scene 2 | Soil photo background, beats 0-2 |
+| `ant_coast.jpg` | Scene 2, Scene 7 | Geo/coast background, beats 3-6; also Scene 7 card background overlay |
+| `ant_mass_change.png` | Scene 3 | Fallback background if ice video fails |
+| `soil_core.jpg` | Scene 2 | Soil core photo, beat 6 right panel |
+| `ant_fw_camp.jpg` | Scene 4 | Field camp photo, beat 1 full-bleed background |
+| `ant_field_work.png` | Scene 7 | Field science card image |
+| `ant_dry_valley.png` | Scene 7 | Astrobiology card image |
+ 
+### Maps and data layers
+ 
+| File | Used in | Notes |
+|------|---------|-------|
+| `acbr_regions.jpg` | Scene 4 | Antarctic Conservation Biogeographic Regions map, beat 0 |
+| `samples_real.svg` | Scene 4 | 171 actual sample locations across 4 regions, beat 2 |
+| `elevation.png` | Scene 5 | Satellite data grid, beat 0 |
+| `precipitation.png` | Scene 5 | Satellite data grid, beat 0 |
+| `contours.png` | Scene 5 | Satellite data grid (slope and aspect), beat 0 |
+| `lithology.png` | Scene 5 | Satellite data grid, beat 0 |
+ 
+### ML prediction maps
+ 
+All used in Scene 6 map explorer. Files follow the naming convention `clean_NN_propertyname.png`.
+ 
+| File | Property | In HTML |
+|------|----------|---------|
+| `clean_01_delta-15N.png` | Nitrogen isotopes | Yes |
+| `clean_02_phosphorus.png` | Phosphorus | Yes |
+| `clean_03_sodium.png` | Soluble sodium | Yes |
+| `clean_04_nickel.png` | Nickel | Yes |
+| `clean_10_titanium.png` | Titanium | Yes |
+ 
+### Ice retreat slideshow
+ 
+Used in Scene 7, climate science card.
+ 
+- `ice_retreat_1.png` through `ice_retreat_6.png`
+---
+ 
+## Source files (illustrator_files/)
+ 
+PDF exports of base map layers, kept for reference and potential re-export.
+ 
+| File | Notes |
+|------|-------|
+| `all_layouts.pdf` | All map layouts compiled |
+| `basemap.pdf` | Base satellite map |
+| `elevation.pdf` | Elevation raster source |
+| `precipitation.pdf` | Precipitation raster source |
+| `lithology.pdf` | Lithology point data source |
+| `contours.pdf` | Contour lines source |
+| `samples.pdf` | Sample locations source |
+| `standard_basemap.pdf` | Clean basemap without overlays |
+ 
+---
+ 
+#### Everything else unused has been moved to `assets/images/asset_archive/`.
